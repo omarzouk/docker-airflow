@@ -1,11 +1,9 @@
 # VERSION 1.9.0-3
-# AUTHOR: Matthieu "Puckel_" Roisil
+# AUTHOR: Omar "Marzouk"
 # DESCRIPTION: Basic Airflow container
-# BUILD: docker build --rm -t puckel/docker-airflow .
-# SOURCE: https://github.com/puckel/docker-airflow
 
-FROM python:3.6-slim
-MAINTAINER Puckel_
+FROM python:2.7-slim
+MAINTAINER Marzouk
 
 # Never prompts the user for choices on installation/configuration of packages
 ENV DEBIAN_FRONTEND noninteractive
@@ -24,7 +22,7 @@ ENV LC_MESSAGES en_US.UTF-8
 
 RUN set -ex \
     && buildDeps=' \
-        python3-dev \
+        python-dev \
         libkrb5-dev \
         libsasl2-dev \
         libssl-dev \
@@ -34,13 +32,14 @@ RUN set -ex \
         liblapack-dev \
         libpq-dev \
         git \
+        gcc \
     ' \
     && apt-get update -yqq \
     && apt-get upgrade -yqq \
     && apt-get install -yqq --no-install-recommends \
         $buildDeps \
-        python3-pip \
-        python3-requests \
+        python-pip \
+        python-requests \
         mysql-client \
         mysql-server \
         libmysqlclient-dev \
